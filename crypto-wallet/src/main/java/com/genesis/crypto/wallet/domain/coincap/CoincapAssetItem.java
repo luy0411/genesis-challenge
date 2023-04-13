@@ -1,6 +1,9 @@
-package com.genesis.crypto.wallet.coincap;
+package com.genesis.crypto.wallet.domain.coincap;
 
-public class CoincapAsset {
+import java.util.stream.Stream;
+
+public class CoincapAssetItem {
+
     private String id;
     private String rank;
     private String symbol;
