@@ -2,31 +2,56 @@ package com.genesis.crypto.wallet.domain;
 
 public class Asset {
 
-    private AssetType type;
-    private Double bestPerformance;
-    private Double worstPerformance;
+    private String symbol;
+    private Double originalPrice;
+    private Double actualPrice;
+    private Double position;
+    private Double percent;
 
-    public AssetType getType() {
-        return type;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setType(AssetType type) {
-        this.type = type;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
-    public Double getBestPerformance() {
-        return bestPerformance;
+    public Double getOriginalPrice() {
+        return originalPrice;
     }
 
-    public void setBestPerformance(Double bestPerformance) {
-        this.bestPerformance = bestPerformance;
+    public void setOriginalPrice(Double originalPrice) {
+        this.originalPrice = originalPrice;
     }
 
-    public Double getWorstPerformance() {
-        return worstPerformance;
+    public Double getActualPrice() {
+        return actualPrice;
     }
 
-    public void setWorstPerformance(Double worstPerformance) {
-        this.worstPerformance = worstPerformance;
+    public void setActualPrice(Double actualPrice) {
+        this.actualPrice = actualPrice;
+    }
+
+    public Double getPosition() {
+        return position;
+    }
+
+    public void setPosition(Double position) {
+        this.position = position;
+    }
+
+    public Double getPercent() {
+        return (getActualPrice() * 100.0) / getOriginalPrice();
+    }
+
+    @Override
+    public String toString() {
+        return "Asset{" +
+                "symbol='" + getSymbol() + '\'' +
+                ", originalPrice=" + getOriginalPrice() +
+                ", actualPrice=" + getActualPrice() +
+                ", position=" + getPosition() +
+                ", percent=" + getPercent() +
+                '}';
     }
 }
