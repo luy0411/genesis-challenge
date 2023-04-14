@@ -1,6 +1,6 @@
 package com.genesis.crypto.wallet.domain;
 
-public class Asset {
+public class WalletAsset {
 
     private String symbol;
     private Double originalPrice;

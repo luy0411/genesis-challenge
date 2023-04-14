@@ -1,6 +1,5 @@
-package com.genesis.crypto.wallet.core;
+package com.genesis.crypto.wallet.csv;
 
-import com.genesis.crypto.wallet.domain.csv.CSVRecord;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import org.springframework.beans.factory.annotation.Value;

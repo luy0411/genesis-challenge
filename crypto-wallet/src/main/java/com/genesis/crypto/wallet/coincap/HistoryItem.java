@@ -1,9 +1,8 @@
-package com.genesis.crypto.wallet.domain.coincap;
+package com.genesis.crypto.wallet.coincap;
 
-import java.time.Period;
 import java.util.Date;
 
-public class CoincapHistoryItem {
+public class HistoryItem {
 
     private Double priceUsd;
     private Date time;

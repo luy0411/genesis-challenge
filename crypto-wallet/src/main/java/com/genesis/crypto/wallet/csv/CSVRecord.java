@@ -1,4 +1,4 @@
-package com.genesis.crypto.wallet.domain.csv;
+package com.genesis.crypto.wallet.csv;
 
 import com.opencsv.bean.CsvBindByName;
 

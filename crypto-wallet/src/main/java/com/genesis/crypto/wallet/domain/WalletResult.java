@@ -5,32 +5,32 @@ import java.util.List;
 
 public class WalletResult {
 
-    private List<Asset> assets;
+    private List<WalletAsset> assets;
 
-    public WalletResult(List<Asset> assets) {
+    public WalletResult(List<WalletAsset> assets) {
         this.assets = assets;
     }
 
     public Double getTotal() {
         Double total = 0.0;
-        for (Asset asset : assets) {
+        for (WalletAsset asset : assets) {
             total += asset.getPosition();
         }
         return total;
     }
 
-    public Asset getBestAsset() {
-        return assets.stream().max(Comparator.comparingDouble(Asset::getPerformance)).get();
+    public WalletAsset getBestAsset() {
+        return assets.stream().max(Comparator.comparingDouble(WalletAsset::getPerformance)).get();
     }
 
-    public Asset getWorstAsset() {
-        return assets.stream().min(Comparator.comparingDouble(Asset::getPerformance)).get();
+    public WalletAsset getWorstAsset() {
+        return assets.stream().min(Comparator.comparingDouble(WalletAsset::getPerformance)).get();
     }
 
     @Override
     public String toString() {
-        Asset best = getBestAsset();
-        Asset worst = getWorstAsset();
+        WalletAsset best = getBestAsset();
+        WalletAsset worst = getWorstAsset();
 
         return String.format("total=%f,best_asset=%s,best_performance=%f,worst_asset=%s,worst_performance=%f}",
                 getTotal(), best.getSymbol(), best.getPerformance(), worst.getSymbol(), worst.getPerformance());
