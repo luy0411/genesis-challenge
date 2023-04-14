@@ -6,7 +6,6 @@ public class Asset {
     private Double originalPrice;
     private Double actualPrice;
     private Double position;
-    private Double percent;
 
     public String getSymbol() {
         return symbol;
@@ -40,8 +39,8 @@ public class Asset {
         this.position = position;
     }
 
-    public Double getPercent() {
-        return (getActualPrice() * 100.0) / getOriginalPrice();
+    public Double getPerformance() {
+        return ((getActualPrice() * 100.0) / getOriginalPrice())/100.0;
     }
 
     @Override
@@ -51,7 +50,7 @@ public class Asset {
                 ", originalPrice=" + getOriginalPrice() +
                 ", actualPrice=" + getActualPrice() +
                 ", position=" + getPosition() +
-                ", percent=" + getPercent() +
+                ", performance=" + getPerformance() +
                 '}';
     }
 }

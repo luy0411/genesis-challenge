@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.print.attribute.HashAttributeSet;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -29,21 +30,27 @@ public class WalletManager {
 
     public void doStuff() throws Exception {
         // GIVEN: a csv file that is a client wallet
-        List<CSVRecord> walletRecords = csvParser.getWalletRecords();
+        List<CSVRecord> records = csvParser.getWalletRecords();
+        List<Asset> assets = new ArrayList<>();
 
         // WHEN: for each record, search in the Coincap API its id and actual price (D1)
         // TODO: put assets response in a cache
-        for (CSVRecord record : walletRecords) {
-            CoincapAssets assets = coincapCaller.getAssets();
-            CoincapAssetItem coincapAsset = assets.getData().stream().filter(a -> a.getSymbol().equals(record.getSymbol())).findFirst().get();
+        for (CSVRecord record : records) {
+            CoincapAssets coincapAssets = coincapCaller.getAssets();
+            CoincapAssetItem coincapAsset = coincapAssets.getData().stream()
+                                                                   .filter(a -> a.getSymbol().equals(record.getSymbol()))
+                                                                   .findFirst().get();
+
             CoincapHistory coincapHistory = coincapCaller.getAssetHistoryById(coincapAsset.getId());
             CoincapHistoryItem actualPrice = coincapHistory.getData().get(0);
 
             Asset asset = createAsset(record, actualPrice);
-            logger.info(asset.toString());
+            assets.add(asset);
         }
 
         // THEN: print results
+        WalletResult result = new WalletResult(assets);
+        logger.info(result.toString());
     }
 
     private Asset createAsset(CSVRecord record,CoincapHistoryItem actualPrice) {
@@ -54,9 +61,5 @@ public class WalletManager {
         asset.setPosition(record.getQuantity() * actualPrice.getPriceUsd());
 
         return asset;
-    }
-
-    public WalletResult prepareResult(){
-        return new WalletResult();
     }
 }
