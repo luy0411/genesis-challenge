@@ -1,17 +1,17 @@
 # genesis-challenge
 
-O objetivo deste desafio é criar um programa Java que, dada uma coleção de ativos de criptomoeda com suas posições, deve buscar de forma simultânea e atualizar os preços mais recentes de cada ativo através da API Coincap. O programa deve retornar o valor financeiro total atualizado da carteira, além de informações sobre o desempenho dos ativos.
+The goal of this challenge is to create a Java program that, given a collection of cryptocurrency assets with their positions, should simultaneously search for and update the latest prices for each asset through the Coincap API. The program should return the updated total financial value of the wallet, as well as information about the performance of the assets.
 
-A entrada será um arquivo CSV representando a carteira, com as colunas símbolo, quantidade e preço. A saída será uma linha com informações sobre o desempenho, incluindo o valor total da carteira em dólares, o ativo com o melhor desempenho, o desempenho percentual desse ativo, o ativo com o pior desempenho e o desempenho percentual desse ativo. Todos os valores devem ser arredondados para duas casas decimais e seguirem a regra HALF_UP.
+The input will be a CSV file representing the wallet, with columns for symbol, quantity, and price. The output will be a line with information about the performance, including the total value of the wallet in dollars, the best-performing asset, the percentage performance of that asset, the worst-performing asset, and the percentage performance of that asset. All values should be rounded to two decimal places and follow the HALF_UP rule.
 
-Algumas informações técnicas:
+Here are some technical details:
 
-- É necessário usar Java 11+ e construir o projeto com Maven.
+- You need to use Java 11+ and build the project with Maven.
 
-- É obrigatório escrever testes unitários, que podem ou não usar mock da API.
+- It's mandatory to write unit tests, which may or may not use API mocks.
 
-- Os preços dos ativos devem ser obtidos de forma simultânea em grupos de três, e nunca em um único thread (a menos que haja apenas um ativo na carteira).
+- Asset prices must be obtained simultaneously in groups of three, and never in a single thread (unless there is only one asset in the wallet).
 
-- É preciso utilizar a API Coincap para buscar as informações necessárias. Link de exemplo: https://docs.coincap.io/#89deffa0-ab03-4e0a-8d92-637a857d2c91
+- You need to use the Coincap API to fetch the necessary information. Here's an example link: https://docs.coincap.io/#89deffa0-ab03-4e0a-8d92-637a857d2c91
 
-- Um exemplo de entrada e saída é dado no texto do desafio. 
+- An example of input and output is given in the challenge original text.
