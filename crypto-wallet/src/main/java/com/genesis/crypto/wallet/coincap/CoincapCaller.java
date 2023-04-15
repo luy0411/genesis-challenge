@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -11,9 +12,9 @@ import java.io.IOException;
 @Component
 public class CoincapCaller {
 
-    private static final String ASSETS_API = "https://api.coincap.io/v2/assets";
-    private static final String HISTORY_API = "https://api.coincap.io/v2/assets/%s/history";
-    private static final String HISTORY_API_QUERYSTRING = "?interval=d1&start=1617753600000&end=1617753601000";
+    public static final String ASSETS_API = "https://api.coincap.io/v2/assets";
+    public static final String HISTORY_API = "https://api.coincap.io/v2/assets/%s/history";
+    public static final String HISTORY_API_QUERYSTRING = "?interval=d1&start=1617753600000&end=1617753601000";
 
     private OkHttpClient okHttpClient;
     private ObjectMapper objectMapper;
@@ -40,8 +41,14 @@ public class CoincapCaller {
 
     private Object callAPI(Request request, Class responseClazz) throws IOException {
         try (Response response = okHttpClient.newCall(request).execute()) {
-            String responseBody = response.body().string();
+            String responseBody = getResponseBody(request.url().toString(), response);
             return objectMapper.readValue(responseBody,responseClazz);
         }
+    }
+
+    // Public access for mocking
+    public String getResponseBody(String url, Response response) throws IOException {
+        String responseBody = response != null ? response.body().string() : "";
+        return responseBody;
     }
 }

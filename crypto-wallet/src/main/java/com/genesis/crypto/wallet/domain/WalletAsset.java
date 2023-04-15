@@ -1,11 +1,14 @@
 package com.genesis.crypto.wallet.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class WalletAsset {
 
     private String symbol;
-    private Double originalPrice;
-    private Double actualPrice;
-    private Double position;
+    private BigDecimal originalPrice;
+    private BigDecimal actualPrice;
+    private BigDecimal position;
 
     public String getSymbol() {
         return symbol;
@@ -15,32 +18,34 @@ public class WalletAsset {
         this.symbol = symbol;
     }
 
-    public Double getOriginalPrice() {
-        return originalPrice;
+    public BigDecimal getOriginalPrice() {
+        return originalPrice.setScale(2, RoundingMode.HALF_UP);
     }
 
-    public void setOriginalPrice(Double originalPrice) {
+    public void setOriginalPrice(BigDecimal originalPrice) {
         this.originalPrice = originalPrice;
     }
 
-    public Double getActualPrice() {
-        return actualPrice;
+    public BigDecimal getActualPrice() {
+        return actualPrice.setScale(2, RoundingMode.HALF_UP);
     }
 
-    public void setActualPrice(Double actualPrice) {
+    public void setActualPrice(BigDecimal actualPrice) {
         this.actualPrice = actualPrice;
     }
 
-    public Double getPosition() {
+    public BigDecimal getPosition() {
         return position;
     }
 
-    public void setPosition(Double position) {
+    public void setPosition(BigDecimal position) {
         this.position = position;
     }
 
-    public Double getPerformance() {
-        return ((getActualPrice() * 100.0) / getOriginalPrice())/100.0;
+    public BigDecimal getPerformance() {
+        BigDecimal hundred = new BigDecimal(100.0);
+        return getActualPrice().multiply(hundred).divide(getOriginalPrice(), RoundingMode.HALF_UP)
+                                                 .divide(hundred, RoundingMode.HALF_UP);
     }
 
     @Override

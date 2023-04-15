@@ -29,8 +29,7 @@ public class WalletProcessor {
         this.coincapCaller = coincapCaller;
     }
 
-    public void doStuff() throws Exception {
-        List<CSVRecord> records = csvParser.getWalletRecords();
+    public WalletResult doStuff(List<CSVRecord> records) throws Exception {
         List<WalletAsset> assets = new ArrayList<>();
 
         for (CSVRecord record : records) {
@@ -48,6 +47,8 @@ public class WalletProcessor {
 
         WalletResult result = new WalletResult(assets);
         logger.info(result.toString());
+
+        return result;
     }
 
     private WalletAsset createAsset(CSVRecord record, HistoryItem actualPrice) {
@@ -55,7 +56,7 @@ public class WalletProcessor {
         asset.setSymbol(record.getSymbol());
         asset.setOriginalPrice(record.getPrice());
         asset.setActualPrice(actualPrice.getPriceUsd());
-        asset.setPosition(record.getQuantity() * actualPrice.getPriceUsd());
+        asset.setPosition(record.getQuantity().multiply(actualPrice.getPriceUsd()));
 
         return asset;
     }

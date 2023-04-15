@@ -2,16 +2,18 @@ package com.genesis.crypto.wallet.csv;
 
 import com.opencsv.bean.CsvBindByName;
 
+import java.math.BigDecimal;
+
 public class CSVRecord {
 
     @CsvBindByName
     private String symbol;
 
     @CsvBindByName
-    private Double quantity;
+    private BigDecimal quantity;
 
     @CsvBindByName
-    private Double price;
+    private BigDecimal price;
 
     public String getSymbol() {
         return symbol;
@@ -21,19 +23,19 @@ public class CSVRecord {
         this.symbol = symbol;
     }
 
-    public Double getQuantity() {
+    public BigDecimal getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Double quantity) {
+    public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
