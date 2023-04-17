@@ -48,6 +48,9 @@ public class WalletAsset {
                                                  .divide(hundred, RoundingMode.HALF_UP);
     }
 
+    public Boolean isNull(){
+        return this.actualPrice == null;
+    }
     @Override
     public String toString() {
         return "Asset{" +

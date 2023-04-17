@@ -15,7 +15,9 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 @SpringBootTest
 public class CucumberConfig {
 
-    @SpyBean CoincapCaller coincapCaller;
-    @MockBean OkHttpClient okHttpClient;
-    @MockBean Call call;
+    // If Coincap will bot be called in unit testing (when using /resources/mocks/*.json)
+    //@SpyBean CoincapCaller coincapCaller;
+    //@MockBean OkHttpClient okHttpClient;
+    //@MockBean Call call;
+
 }
