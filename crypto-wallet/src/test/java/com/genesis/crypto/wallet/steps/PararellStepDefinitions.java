@@ -44,7 +44,11 @@ public class PararellStepDefinitions extends AppIntegrationTest {
 
 	@Then("^get the final results$")
 	public void getResults() {
-		assertThat(result).isNotNull();
+		assertThat(result).isNotNull().satisfies(it -> {
+			assertThat(it.getTotal()).isNotNull();
+			assertThat(it.getBestAsset()).isNotNull();
+			assertThat(it.getWorstAsset()).isNotNull();
+		});
 	}
 
 }
